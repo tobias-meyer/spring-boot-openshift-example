@@ -1,8 +1,9 @@
 #!/usr/bin/groovy
 
 @Library('github.com/fabric8io/fabric8-pipeline-library@master')
+
 mavenNode {
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'cd-github', url: 'https://github.com/tobias-meyer/spring-boot-openshift-example.git']]])
+    checkout scm
     container(name: 'maven') {
         sh 'mvn clean install'
     }
